@@ -1,7 +1,10 @@
 import paho.mqtt.client as mqtt
+
 # https://www.waveshare.com/wiki/Template:Raspberry_Pi_Guides_for_SPI_e-Paper
 
 # The callback for when the client receives a CONNACK response from the server.
+
+
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
 
@@ -10,6 +13,8 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("dabs")
 
 # The callback for when a PUBLISH message is received from the server.
+
+
 def on_message(client, userdata, msg):
     print(msg.topic+" "+str(msg.payload))
 
