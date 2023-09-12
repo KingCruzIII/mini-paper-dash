@@ -112,15 +112,16 @@ try:
     PagePath = ["Menu.bmp", "screen_output.png", "Photo_1.bmp", "Photo_2.bmp"]
 
     while (1):
+        # image refresh
         if (i > 20 or ReFlag == 1):
             if (Page == 0):
                 DrawImage.rectangle((209, 40, 290, 120), fill=0)
                 Draw_Time(DrawImage, 209, 40, font24, font15)
                 # print("*** Time Refresh ***\r\n")
 
-            if (Page == 1):
-                weather_2in9_V2.get_weather_png()
-                Read_BMP(PagePath[Page], 0, 0)
+            # if (Page == 1):
+                # weather_2in9_V2.get_weather_png()
+                # Read_BMP(PagePath[Page], 0, 0)
 
             epd.display_Partial_Wait(epd.getbuffer(image))
             print("*** Touch Refresh ***\r\n")
