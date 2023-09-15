@@ -1,0 +1,6 @@
+{
+  "livingroom_current_temperature": "{{state_attr('climate.thermostat', 'current_temperature')}}",
+  "livingroom_hvac_action": "{{state_attr('climate.thermostat', 'hvac_action')}}",
+  "livingroom_set_temperature": "{{state_attr('climate.thermostat', 'temperature')}}",
+  "front_door_motion": "{{states('camera.doorbell_repeater_3726')}}"
+}

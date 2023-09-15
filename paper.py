@@ -49,8 +49,9 @@ try:
     logging.info("Starting First Draw")
     Himage = Image.new('1', (epd.height, epd.width), 255)
     draw = ImageDraw.Draw(Himage)
-    draw.text((10, 0), 'hello world', font=font24, fill=0)
-    draw.line((70, 50, 20, 100), fill=0)
+
+    owlimg = Image.open(os.path.join(assetdir, 'Untitled.bmp'))
+
     epd.display_Base(epd.getbuffer(Himage))
 
     logging.info("Starting Drawing Loop")
@@ -59,14 +60,23 @@ try:
         tp.ICNT_Scan(ICNT_Dev, ICNT_Old)
         if (ICNT_Old.X[0] == ICNT_Dev.X[0] and ICNT_Old.Y[0] == ICNT_Dev.Y[0]):
             continue
-    if (ICNT_Dev.TouchCount):
-        ICNT_Dev.TouchCount = 0
-        if (ICNT_Dev.X[0] <= 100):
-            logging.info("100 >= x pressed")
-        elif (ICNT_Dev.X[0] > 100 & ICNT_Dev.X[0] < 196):
-            logging.info("100 < x < 196 pressed")
-        else:
-            logging.info("196 <= pressed")
+    
+        if (ICNT_Dev.TouchCount):
+            ICNT_Dev.TouchCount = 0
+            if (ICNT_Dev.X[0] <= 100):
+                logging.info("left")
+                epd.Clear(0xFF)
+                draw.text((10, 0), 'Front Door:', font=font24, fill=0)
+                draw.line((0, 48, 100, 48), fill=0)
+                draw.text((10, 24), '2 hours ago', font=font24, fill=0)
+                epd.display_Base(epd.getbuffer(Himage))
+            elif(ICNT_Dev.X[0] >= 196):
+                epd.Clear(0xFF)
+                epd.display(epd.getbuffer(owlimg))
+                logging.info("right")
+            elif (ICNT_Dev.X[0] > 100 & ICNT_Dev.X[0] < 196):
+                logging.info("center")
+
 except IOError as e:
     logging.info(e)
 
